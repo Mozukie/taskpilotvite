@@ -1,0 +1,12 @@
+.logo-image{
+    width: 10em;
+    height: 10em;
+    margin: 0 auto;
+    display: block;
+}
+
+header{
+    background-color: rgb(192, 191, 191);
+    justify-content: center;
+
+}
