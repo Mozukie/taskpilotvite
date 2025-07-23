@@ -1,0 +1,35 @@
+.login-content{
+    display:block;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+
+.login-container {
+  text-align: center;
+  margin-top: 20vh;
+  font-family: 'Nunito', sans-serif;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 300px;
+  margin: auto;
+}
+
+.login-form input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.login-form button {
+  padding: 10px;
+  background-color: #ffc0cb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}

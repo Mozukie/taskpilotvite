@@ -1,0 +1,38 @@
+import '../CSS/Login.css'
+import React from 'react'
+import HeaderLogin from '../components/HeaderLogin.jsx'
+import { Link } from 'react-router-dom'
+
+function Login(){
+    return (
+        <div>
+        <header>
+            <HeaderLogin />
+        </header>
+        <div className='login-wrapper'>
+            <div className="login-page">
+                <h2>Welcom to TaskPilot!</h2>
+                    <div className="login-container">
+                        <h4>Login</h4>
+                        <form className="login-form">
+                            <input type="text" placeholder="Username" />
+                            <input type="password" placeholder="Password" />
+                            <div className="remember-me">
+                                <input type="checkbox" id="remember" />
+                                <label htmlFor="remember">Remember me</label>
+                            </div>
+                            <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
+                            <button type="submit">Log In</button>
+                            <p>Not yet registered?</p>
+                            <button className="register-button">
+                                <Link to="/register" className="register-link">Register</Link>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Login;
