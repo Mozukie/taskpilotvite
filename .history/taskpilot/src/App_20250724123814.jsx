@@ -9,7 +9,8 @@ import './CSS/App.css'
 function App() {
 
   return (
-    <div className="body">
+    <div>
+    <body>
       <Router>
         <Routes>
           <Route path="/" element={<Login/>} />
@@ -18,6 +19,7 @@ function App() {
           <Route path='/about' element={<About/>} />
         </Routes>
       </Router>
+      </body>
       <footer>
         <p>© 2025 TaskPilot. All rights reserved.</p>
       </footer>

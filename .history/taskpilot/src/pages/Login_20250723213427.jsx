@@ -10,18 +10,18 @@ function Login(){
         </header>
         <div className='login-wrapper'>
             <div className="login-page">
-                <h2>Welcome to TaskPilot!</h2>
+                <h2>Welcom to TaskPilot!</h2>
                     <div className="login-container">
                         <h4>Login</h4>
                         <form className="login-form">
                             
                             <input type="text" placeholder="Email" id='email'/>
-                            <input type="password" placeholder="Password" id='password'/>
+                            <input type="password" placeholder="Password" />
                             <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
                             <button type="submit">Log In</button>
                             
                             <div>
-                            <p>Don't have an account?</p>
+                            <p>Not yet registered?</p>
                                 <a href="/register" className='register-button'>Register</a>
                             </div>
                         </form>

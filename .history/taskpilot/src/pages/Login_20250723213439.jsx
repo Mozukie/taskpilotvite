@@ -10,7 +10,7 @@ function Login(){
         </header>
         <div className='login-wrapper'>
             <div className="login-page">
-                <h2>Welcome to TaskPilot!</h2>
+                <h2>Welcom to TaskPilot!</h2>
                     <div className="login-container">
                         <h4>Login</h4>
                         <form className="login-form">
@@ -21,7 +21,7 @@ function Login(){
                             <button type="submit">Log In</button>
                             
                             <div>
-                            <p>Don't have an account?</p>
+                            <p>Not yet registered?</p>
                                 <a href="/register" className='register-button'>Register</a>
                             </div>
                         </form>

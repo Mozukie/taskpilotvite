@@ -16,7 +16,7 @@
 .login-page {
   background-color: rgb(255, 255, 255);
   border-radius: 3em;
-  padding: 3em;
+  padding: 5em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;

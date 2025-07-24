@@ -9,14 +9,16 @@ import './CSS/App.css'
 function App() {
 
   return (
-    <div className="body">
+    <div>
       <Router>
+        <div className="body">
         <Routes>
           <Route path="/" element={<Login/>} />
           <Route path="/login" element={<Login/>} />
           <Route path='/register' element={<Register/>} />
           <Route path='/about' element={<About/>} />
         </Routes>
+        </div>
       </Router>
       <footer>
         <p>© 2025 TaskPilot. All rights reserved.</p>
