@@ -1,0 +1,35 @@
+import React  from 'react';
+import { useState, useEffect } from 'react';
+import '../CSS/Header.css';
+import { get } from 'mongoose';
+
+function Header() {
+  const [users, setUsers] = useState(null);
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await get('http://localhost:5000/api/user/id=?'); // Assuming you have an endpoint to get user details
+        setUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+      
+
+  return (
+    <header className="header">
+        <img src="/logo.png" alt="TaskPilot Logo" className="logo-image" />
+      <nav>
+        <ul className="header-nav">
+          <a href="#home">Home</a>
+          <a href="#tasks">Tasks</a>
+          <a href="#settings">Settings</a>
+          <a href="#about">About</a>
+          <a href="profile">Hello,{users?.first_name || " Guest"} !</a>
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;
