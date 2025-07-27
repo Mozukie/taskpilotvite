@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser, verifyToken); // Route for user login
-router.get("/profile/:", getUser,); // Route to get user profile by ID
+router.get("/user/:employee_id", getUser,); // Route to get user profile by ID
 
 
 

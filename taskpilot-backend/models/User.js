@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   first_name: String,
-  last_name: String,
-  email: String,
+  last_name: { type: String, unique: true} ,
+  email: { type: String, unique: true}, 
   employee_id: String,
   password: String, // hash in real use!
 });

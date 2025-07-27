@@ -1,13 +1,16 @@
 // backend/controllers/userController.js
 import User from "../models/User.js";
+import bcrypt from "bcryptjs"; // For hashing passwords
+import jwt from "jsonwebtoken"; // For generating JWT tokens
 
 export const registerUser = async (req, res) => {
-  try {
+  const jwtSecret = process.env.JWT_SECRET;
     const { first_name, last_name, email, employee_id, password, confirmPassword } = req.body;
-
     // Basic validation
+  try {
     if (!first_name || !last_name || !email || !employee_id || !password || !confirmPassword) {
       return res.status(400).json({ error: "All fields are required!" });
+      
     }
 
     if (password !== confirmPassword) {
@@ -49,14 +52,14 @@ export const registerUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: "User already exists!" });
     }
-
+    const hash = await bcrypt.hash(password);
     // 🚨 In production, hash password before saving
     const newUser = new User({
       first_name,
       last_name,
       email,
       employee_id,
-      password,
+      passwor: hash,
     });
 
     await newUser.save();
@@ -67,35 +70,42 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  try {
     const { email, password } = req.body;
-
-    // Basic validation
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required!" });
+    
+    try {
+        // Validate input
+        if (!email || !password) {
+        return res.status(400).json({ error: "Email and password are required!" });
+        }
+    
+        // Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+        return res.status(400).json({ error: "Invalid email or password!" });
+        }
+    
+        // Check password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+        return res.status(400).json({ error: "Invalid email or password!" });
+        }
+    
+        // Generate JWT token
+        const token = jwt.sign({ _id: user._id }, jwtSecret, { expiresIn: "1h" });
+    
+        res.status(200).json({ message: "Login successful!", token });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
+    };
 
-    // 🚨 In production, compare hashed password
-    const user = await User.findOne({ email, password });
-    if (!user) {
-      return res.status(401).json({ error: "Invalid credentials!" });
-    }
-
-    // Successful login
-    res.status(200).json({ message: "Login successful!", user: { first_name: user.first_name, last_name: user.last_name } });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
 export const getUser = async (req, res) => {
   try {
-    const userId = req.params._id;
-    const user = await User.findById(_id);
-    if (!user) {
-      return res.status(404).json({ error: "User not found!" });
-    }
-    res.status(200).json(user);
-    } catch (error) {
-    res.status(500).json({ error: error.message });
-    }
-}
+    const user = await User.findById(req.employee_id).select("password");
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    res.json(user);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+};
