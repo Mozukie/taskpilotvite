@@ -1,0 +1,22 @@
+# ENV files
+**/.env
+**/.env.*
+
+# Node modules
+**/node_modules/
+
+# Log files
+*.log
+
+# Build output
+**/dist/
+**/build/
+**/.vite/
+
+# OS/IDE
+.DS_Store
+.vscode/
+.idea/
+
+# History files (if using extensions like VSCode "Local History")
+.history/
