@@ -15,10 +15,10 @@ function Login(){
             window.location.href = '/home'; // ✅ redirect after successful login
             } catch (error) {
             console.error('Login failed:', error.response?.data || error.message);
-            alert('Login failed. Please check your credentials.');
+            alert('Invalid email or password!');
             }
         };
-
+        
     return (
         <div>
         <header>

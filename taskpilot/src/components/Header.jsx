@@ -14,7 +14,7 @@ function Header() {
           <a href="#tasks">Tasks</a>
           <a href="#settings">Settings</a>
           <a href="#about">About</a>
-          <a href="profile">Profile</a>
+          <a href="#UserProfile">Profile</a>
         </ul>
       </nav>
     </header>

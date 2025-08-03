@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs"; // For hashing passwords
 import jwt from "jsonwebtoken"; // For generating JWT tokens
 
 export const registerUser = async (req, res) => {
-  const jwtSecret = process.env.JWT_SECRET;
+
     const { first_name, last_name, email, employee_id, password, confirmPassword } = req.body;
     // Basic validation
   try {
@@ -52,14 +52,15 @@ export const registerUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: "User already exists!" });
     }
-    const hash = await bcrypt.hash(password);
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
     // 🚨 In production, hash password before saving
     const newUser = new User({
       first_name,
       last_name,
       email,
       employee_id,
-      passwor: hash,
+      password: hash
     });
 
     await newUser.save();
@@ -71,7 +72,7 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
-    
+
     try {
         // Validate input
         if (!email || !password) {
@@ -91,7 +92,7 @@ export const loginUser = async (req, res) => {
         }
     
         // Generate JWT token
-        const token = jwt.sign({ _id: user._id }, jwtSecret, { expiresIn: "1h" });
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
     
         res.status(200).json({ message: "Login successful!", token });
     } catch (error) {
